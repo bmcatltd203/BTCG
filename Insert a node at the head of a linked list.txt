@@ -1,0 +1,79 @@
+import java.io.*;
+import java.util.*;
+
+class SinglyLinkedListNode {
+    public int data;
+    public SinglyLinkedListNode next;
+
+    public SinglyLinkedListNode(int nodeData) {
+        this.data = nodeData;
+        this.next = null;
+    }
+}
+
+class SinglyLinkedList {
+    public SinglyLinkedListNode head;
+    public SinglyLinkedListNode tail;
+
+    public SinglyLinkedList() {
+        this.head = null;
+        this.tail = null;
+    }
+
+    public void insertNode(int nodeData) {
+        SinglyLinkedListNode node = new SinglyLinkedListNode(nodeData);
+
+        if (this.head == null) {
+            this.head = node;
+        } else {
+            this.tail.next = node;
+        }
+
+        this.tail = node;
+    }
+}
+
+class Result {
+    public static SinglyLinkedListNode insertNodeAtHead(SinglyLinkedListNode llist, int data) {
+        SinglyLinkedListNode newNode = new SinglyLinkedListNode(data);
+        
+        if (llist == null) {
+            return newNode; // If the list is empty, the new node becomes the head
+        }
+        
+        newNode.next = llist; // Set the next of the new node to the current head
+        return newNode; // Set the new node as the new head
+    }
+}
+
+public class Solution {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        SinglyLinkedList llist = new SinglyLinkedList();
+
+        int elements = Integer.parseInt(bufferedReader.readLine().trim());
+
+        for (int i = 0; i < elements; i++) {
+            int data = Integer.parseInt(bufferedReader.readLine().trim());
+            llist.head = Result.insertNodeAtHead(llist.head, data);
+        }
+
+        SinglyLinkedListNode currentNode = llist.head;
+
+        while (currentNode != null) {
+            bufferedWriter.write(String.valueOf(currentNode.data));
+            currentNode = currentNode.next;
+            if (currentNode != null) {
+                bufferedWriter.write("\n");
+            }
+        }
+
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}

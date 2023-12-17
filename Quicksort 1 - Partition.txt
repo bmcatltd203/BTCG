@@ -1,0 +1,58 @@
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
+
+class Result {
+    public static List<Integer> quickSort(List<Integer> arr) {
+        if (arr.size() <= 1) {
+            return arr; // Base case: if the array has 0 or 1 elements, it's already sorted
+        }
+
+        int pivot = arr.get(0);
+        List<Integer> less = new ArrayList<>();
+        List<Integer> equal = new ArrayList<>();
+        List<Integer> greater = new ArrayList<>();
+
+        for (int num : arr) {
+            if (num < pivot) {
+                less.add(num);
+            } else if (num == pivot) {
+                equal.add(num);
+            } else {
+                greater.add(num);
+            }
+        }
+
+        List<Integer> sorted = new ArrayList<>();
+        sorted.addAll(quickSort(less));
+        sorted.addAll(equal);
+        sorted.addAll(quickSort(greater));
+
+        return sorted;
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int n = Integer.parseInt(bufferedReader.readLine().trim());
+
+        List<Integer> arr = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
+
+        List<Integer> result = Result.quickSort(arr);
+
+        bufferedWriter.write(
+            result.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(" "))
+            + "\n"
+        );
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}

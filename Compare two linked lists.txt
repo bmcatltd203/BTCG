@@ -1,0 +1,25 @@
+    // Complete the compareLists function below.
+
+    /*
+     * For your reference:
+     *
+     * SinglyLinkedListNode {
+     *     int data;
+     *     SinglyLinkedListNode next;
+     * }
+     *
+     */
+    static boolean compareLists(SinglyLinkedListNode head1, SinglyLinkedListNode head2) {
+        // Traverse both lists simultaneously
+        while (head1 != null && head2 != null) {
+            // If data at current nodes is not equal, lists are not equal
+            if (head1.data != head2.data) {
+                return false;
+            }
+            // Move to the next nodes
+            head1 = head1.next;
+            head2 = head2.next;
+        }
+        // If one list has more nodes than the other, they are not equal
+        return head1 == null && head2 == null;
+    }

@@ -1,0 +1,48 @@
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
+
+class Result {
+    public static int introTutorial(int V, List<Integer> arr) {
+        // Using binary search to find the index of V in arr
+        int left = 0;
+        int right = arr.size() - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (arr.get(mid) == V) {
+                return mid; // V found at index mid
+            } else if (arr.get(mid) < V) {
+                left = mid + 1; // Search the right half
+            } else {
+                right = mid - 1; // Search the left half
+            }
+        }
+
+        return -1; // V not found in arr
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int V = Integer.parseInt(bufferedReader.readLine().trim());
+
+        int n = Integer.parseInt(bufferedReader.readLine().trim());
+
+        List<Integer> arr = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
+
+        int result = Result.introTutorial(V, arr);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}

@@ -1,0 +1,16 @@
+	/*
+    class Node 
+    	int data;
+    	Node left;
+    	Node right;
+	*/
+	public static int height(Node root) {
+        if (root == null)
+            return -1; // Height of an empty tree is -1
+
+        int leftHeight = height(root.left);
+        int rightHeight = height(root.right);
+
+        // Return the maximum height of left or right subtree plus 1 for the root
+        return Math.max(leftHeight, rightHeight) + 1;
+    }

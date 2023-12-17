@@ -1,0 +1,20 @@
+    // Complete the printLinkedList function below.
+
+    /*
+     * For your reference:
+     *
+     * SinglyLinkedListNode {
+     *     int data;
+     *     SinglyLinkedListNode next;
+     * }
+     *
+     */
+    static void printLinkedList(SinglyLinkedListNode head) {
+    SinglyLinkedListNode currentNode = head;
+
+    // Traverse the linked list and print each node's data
+    while (currentNode != null) {
+        System.out.println(currentNode.data); // Print the current node's data
+        currentNode = currentNode.next; // Move to the next node
+    }
+}
